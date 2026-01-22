@@ -5,7 +5,7 @@ m = 1
 omega = 1
 
 def U(x):
-	return (x**2)*m*(omega**2)/2
+	return 0 #(x**2)*m*(omega**2)/2
 def V(x, a, b):
 	if a <= x <= b:
 		return U(x)
@@ -38,19 +38,18 @@ def RK4(x_i,x_f, y_i, h, der,E):
 #E st psi(10) approx 0 
 #I know there is some energy between 0.4 and 0.5 that satisfies this
 
-a = 5.944244384765625
+L = 5.944244384765625
 
 def RK4fE(E):
-	return RK4(-a, a, [0, 1], 0.001, der, E)[1][-1] #returns psi(b)
-
-
-print("trial", RK4fE(3*omega))
+        return RK4(-L, L, [0, 1], 0.001, der, E)[1][-1]
+'''
 E_arr = np.linspace(0,3*omega,100)
 psi_barr = []
 for e in E_arr:
 	k = RK4fE(e)
 	print("psi b:", k)
 	psi_barr.append(k)
+
 
 fig, (ax1,ax2) = plt.subplots(1,2,figsize = (10,4))
 
@@ -71,3 +70,26 @@ ax2.set_ylabel("psi(b)")
 fig.suptitle("psi(b) vs E [omega = 1]")
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 plt.show()
+'''
+tol = 10**(-5)
+
+def root_finder(E_i, E_f):
+	x0 = E_i
+	roots_arr = []
+	while x0 < E_f:
+		x0 += 0.01
+		if RK4fE(x0)*RK4fE(x0 + 0.01) < 0:
+			a = x0 
+			b = x0 + 0.1
+			while (b - a)/2 > tol:
+				c = (a + b)/2
+				if  RK4fE(c) == 0:
+					break
+				elif RK4fE(a)*RK4fE(c) < 0:
+					b = c
+				elif RK4fE(b)*RK4fE(c) < 0:
+					a = c
+			roots_arr.append(c)
+	return roots_arr
+
+print("trial", root_finder(0,1))
