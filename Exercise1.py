@@ -55,8 +55,8 @@ while (b - a)/2 > tol:
 plt.plot(RK4(0, 10, [0, 1], 0.001, der, c)[0], RK4(0, 10, [0, 1], 0.001, der, c)[1])
 plt.xlabel("x")
 plt.ylabel("psi(x)")
-plt.savefig('Exercise1Ca.png', dpi=300)
-plt.close()
+#plt.savefig('Exercise1Ca.png', dpi=300)
+#plt.close()
 
 plt.show()
 
