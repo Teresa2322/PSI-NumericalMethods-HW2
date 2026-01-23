@@ -71,7 +71,7 @@ fig.suptitle("psi(b) vs E [omega = 1]")
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 plt.show()
 '''
-tol = 10**(-5)
+tol = 10**(-10)
 
 def root_finder(E_i, E_f):
 	x0 = E_i
@@ -80,8 +80,9 @@ def root_finder(E_i, E_f):
 		x0 += 0.01
 		if RK4fE(x0)*RK4fE(x0 + 0.01) < 0:
 			a = x0 
-			b = x0 + 0.1
-			while (b - a)/2 > tol:
+			b = x0 + 0.01
+			c = 1
+			while abs(a-b) > tol:
 				c = (a + b)/2
 				if  RK4fE(c) == 0:
 					break
@@ -89,7 +90,17 @@ def root_finder(E_i, E_f):
 					b = c
 				elif RK4fE(b)*RK4fE(c) < 0:
 					a = c
+			print("root", c)
 			roots_arr.append(c)
 	return roots_arr
 
-print("trial", root_finder(0,1))
+#print("trial", root_finder(0,1))
+
+n_arr = [1,2,3,4,5,6]
+
+
+plt.plot(n_arr,  root_finder(0,1.3), 'bo-')
+plt.title("Infinite Square well Energy Levels")
+plt.xlabel("nth Energy Level")
+plt.ylabel("Energy")
+plt.show()
