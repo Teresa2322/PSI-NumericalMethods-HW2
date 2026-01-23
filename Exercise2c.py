@@ -66,10 +66,17 @@ def root_finder(E_i, E_f):
 	return roots_arr
 
 #print("trial", root_finder(0,1))
-result = root_finder(0,40)
+result = root_finder(0,45)
 
-plt.plot(np.linspace(0,len(result)-1, len(result)-1), result)
-plt.plot(RK4(-L,L, [0, 1], 0.001, der, 24.762701482103346)[0], RK4(-L,L, [0, 1], 0.001, der, 24.762701482103346)[1])
+def SHO_Elev(n):
+	return omega*(n+(1/2))
+
+n_arr = np.linspace(0,len(result)-1,len(result))#np.linspace(0,len(result), len(result))
+print("narr is", n_arr)
+plt.plot(n_arr, result,'o-', label = 'numerical')
+plt.plot(n_arr, SHO_Elev(n_arr),'o-', label = 'analytical')
+plt.legend()
+#plt.plot(RK4(-L,L, [0, 1], 0.001, der, 24.762701482103346)[0], RK4(-L,L, [0, 1], 0.001, der, 24.762701482103346)[1])
 plt.xlabel("n")
 plt.ylabel("E_n")
 plt.show()
