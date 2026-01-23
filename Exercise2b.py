@@ -5,7 +5,7 @@ m = 1
 omega = 1
 
 def U(x):
-	return 0 #(x**2)*m*(omega**2)/2
+	return (x**2)*m*(omega**2)/2
 def V(x, a, b):
 	if a <= x <= b:
 		return U(x)
@@ -99,7 +99,7 @@ def root_finder(E_i, E_f):
 n_arr = [1,2,3,4,5,6]
 
 
-plt.plot(n_arr,  root_finder(0,1.3), 'bo-')
+plt.plot(n_arr,  root_finder(0, 3*omega), 'bo-')
 plt.title("Infinite Square well Energy Levels")
 plt.xlabel("nth Energy Level")
 plt.ylabel("Energy")
