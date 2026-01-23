@@ -66,18 +66,30 @@ def root_finder(E_i, E_f):
 	return roots_arr
 
 #print("trial", root_finder(0,1))
-result = root_finder(0,45)
+#result = root_finder(0,45)
 
 def SHO_Elev(n):
 	return omega*(n+(1/2))
 
-n_arr = np.linspace(0,len(result)-1,len(result))#np.linspace(0,len(result), len(result))
-print("narr is", n_arr)
-plt.plot(n_arr, result,'o-', label = 'numerical')
-plt.plot(n_arr, SHO_Elev(n_arr),'o-', label = 'analytical')
-plt.legend()
-#plt.plot(RK4(-L,L, [0, 1], 0.001, der, 24.762701482103346)[0], RK4(-L,L, [0, 1], 0.001, der, 24.762701482103346)[1])
-plt.xlabel("n")
-plt.ylabel("E_n")
+#n_arr = np.linspace(0,len(result)-1,len(result))#np.linspace(0,len(result), len(result))
+#print("narr is", n_arr)
+#plt.plot(n_arr, result,'o-', label = 'numerical')
+#plt.plot(n_arr, SHO_Elev(n_arr),'o-', label = 'analytical')
+#plt.legend()
+plt.figure(1)
+plt.title("Wavefunction for n = 10")
+plt.plot(RK4(-L,L, [0, 1], 0.001, der,  10.500379437431517)[0], RK4(-L,L, [0, 1], 0.001, der,  10.500379437431517)[1])
+plt.xlabel("x")
+plt.ylabel("psi(x)")
+plt.figure(2)
+plt.title("Wavefunction for n = 30")
+plt.plot(RK4(-L,L, [0, 1], 0.001, der, 39.65770510710844)[0], RK4(-L,L, [0, 1], 0.001, der, 39.65770510710844)[1])
+plt.xlabel("x")
+plt.ylabel("psi(x)")
+plt.figure(3)
+plt.title("Wavefunction for n = 2") #2.500000000074497
+plt.plot(RK4(-L,L, [0, 1], 0.001, der,2.500000000074497)[0], RK4(-L,L, [0, 1], 0.001, der,2.500000000074497)[1])
+plt.xlabel("x")
+plt.ylabel("psi(x)")
 plt.show()
 
